@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
+//added a comment to test commits
 public class FragBluetooth extends Fragment {
     @Nullable
     @Override
