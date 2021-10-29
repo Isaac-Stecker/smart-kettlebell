@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Kettlebell</string>
+
+    <string-array name="exercises">
+        <item>Squats</item>
+        <item>Bent-over Row</item>
+        <item>Shoulder Press</item>
+    </string-array>
 </resources>
