@@ -22,6 +22,17 @@ int main(void) {
     
     // variable declarations
     char axis;
+    char line[16];
+    char test[16] = "Before read";
+    
+    // test read before main loop
+    sprintf(line, "%s", test);
+    putsLCD(&line);
+    
+    clearScreen();
+    axis = mmaReadAxis(WHO_AM_I);
+    sprintf(line, "Who: %d", axis);
+    putsLCD(&line);
     
     //main loop
     while(1){

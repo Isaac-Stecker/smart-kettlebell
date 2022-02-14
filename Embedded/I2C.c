@@ -49,7 +49,8 @@ char getByteI2C(){
     //char message[] = "Entered getByte";
     //putsLCD(message);
     I2C1CONbits.RCEN = 1;
-    while(I2C1STATbits.RBF);
+    while(!I2C1STATbits.RBF);
+    I2C1CONbits.ACKDT = 1;
     I2C1CONbits.ACKEN = 1;
     us_delay(10);
     return(I2C1RCV);
