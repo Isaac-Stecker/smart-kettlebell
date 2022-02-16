@@ -30,13 +30,16 @@ int main(void) {
     putsLCD(&line);
     
     clearScreen();
-    axis = mmaReadAxis(WHO_AM_I);
+    axis = mmaReadAxis(F_SETUP);
     sprintf(line, "Who: %d", axis);
     putsLCD(&line);
     
+    // turn on accelerometer
+    mmaWriteReg(CTRL_REG_1, ACTIVE);
+    
     //main loop
     while(1){
-        axis = mmaReadAxis(WHO_AM_I);
+        axis = mmaReadAxis(OUT_X_MSB);
         ms_delay(20);
     }
     return 0;

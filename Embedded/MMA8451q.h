@@ -7,6 +7,7 @@
 #ifndef MMA8450_H
 #define	MMA8450_H
 
+void mmaWriteReg(char, char);
 char mmaReadAxis(char);
 
 #ifdef	__cplusplus

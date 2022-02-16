@@ -17,8 +17,24 @@
 
 // order to read reg: WRITE_CMD -> ACCEL_REG -> repeated start -> READ_CMD
 
+//initialize the accelerometer. reg selects the control register, value is the value assigned to the register
+void mmaWriteReg(char reg, char value){
+    startI2C();
+    sendByteI2C(WRITE_CMD);
+    while(I2C1STATbits.ACKSTAT);
+    us_delay(100);
+    sendByteI2C(reg);
+    while(I2C1STATbits.ACKSTAT);
+    us_delay(100);
+    sendByteI2C(value);
+    while(I2C1STATbits.ACKSTAT);
+    us_delay(100);
+    stopI2C();
+}
+
 // read a register associated with a certain axis (x, y, z)
-char mmaReadAxis(char axis){
+
+char mmaReadAxis(char axis){ //PERHAPS int8_t would store the exact value w/ no need of conversion later?
     char dummy;
     startI2C();
     sendByteI2C(WRITE_CMD);
