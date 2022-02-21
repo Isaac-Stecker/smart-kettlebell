@@ -8,7 +8,8 @@
 #define	MMA8450_H
 
 void mmaWriteReg(char, char);
-char mmaReadAxis(char);
+unsigned char mmaReadAxis(char);
+int convertAccelerationForAxis(unsigned char, unsigned char);
 
 #ifdef	__cplusplus
 extern "C" {
@@ -22,4 +23,3 @@ extern "C" {
 #endif
 
 #endif	/* MMA8450_H */
-

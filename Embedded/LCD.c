@@ -4,6 +4,9 @@
  * Header file for the (part #) LCD using the PMP of the PIC24...
  */
 
+#include <xc.h>
+#include "Funcs.h"
+
 #define LCD_SendData(data) { PMADDR = 0x0001; PMDIN1 = data; ms_delay(1); }
 #define LCD_SendCommand(command, delay) { PMADDR = 0x0000; PMDIN1 = command; ms_delay(delay); }
 #define LCD_COMMAND_CLEAR_SCREEN        0x01
@@ -22,9 +25,6 @@
 #define putLCD( d) LCD_SendData((d))
 #define setCursorLine1() LCD_SendCommand(LCD_COMMAND_ROW_0_HOME, 1)
 #define setCursorLine2() LCD_SendCommand(LCD_COMMAND_ROW_1_HOME, 1)
-
-#include <xc.h>
-#include "Funcs.h"
 
 // clear the LCD screen and return the cursor to the home position
 void clearScreen(){
