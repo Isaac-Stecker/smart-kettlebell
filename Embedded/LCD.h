@@ -11,6 +11,8 @@ void InitLCD();
 void setCursorAtLine(int);
 void putsLCD(char*);
 void clearScreen();
+void moveCursorBack(int);
+void moveCursorForward(int);
 
 #ifdef	__cplusplus
 extern "C" {
@@ -24,4 +26,3 @@ extern "C" {
 #endif
 
 #endif	/* LCD_H */
-

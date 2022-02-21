@@ -71,3 +71,19 @@ void putsLCD(char* s){
         putLCD( *s++);
     }
 }
+
+// move cursor back (left) n spaces
+void moveCursorBack(int n){
+    int i = 0;
+    for(i = 0; i < n; ++i){
+        LCD_SendCommand(LCD_COMMAND_MOVE_CURSOR_LEFT, 1);
+    }
+}
+
+// move cursor back (right) n spaces
+void moveCursorForward(int n){
+    int i = 0;
+    for(i = 0; i < n; ++i){
+        LCD_SendCommand(LCD_COMMAND_MOVE_CURSOR_RIGHT, 1);
+    }
+}

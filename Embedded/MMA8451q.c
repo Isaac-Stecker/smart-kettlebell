@@ -44,7 +44,6 @@ void mmaWriteReg(char reg, char value){
 }
 
 // read a register associated with a certain axis (x, y, z)
-
 unsigned char mmaReadAxis(char axis){
     unsigned char dummy;
     startI2C();
@@ -65,7 +64,7 @@ unsigned char mmaReadAxis(char axis){
     return dummy;
 }
 
-// convert LSB accelerometer measurement to g's in fractional form. Returns a integer that was shifted 4 times from a decimal, i.e., 0.5 = 5000
+// convert MSB and LSB accelerometer measurement to g's in fractional form. Returns a integer that was shifted 4 times from a decimal, i.e., 0.5 = 5000
 int convertAccelerationForAxis(unsigned char axisMSB, unsigned char axisLSB) {
     int acceleration = 0;
     int sign = 0;

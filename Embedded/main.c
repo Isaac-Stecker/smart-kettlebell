@@ -30,6 +30,9 @@ int main(void) {
     int xAcceleration = 0;
     int yAcceleration = 0;
     int zAcceleration = 0;
+    int baselineX = 0;
+    int baselineY = 0;
+    int baseilneZ = 0;
     char line[16];
     int temp1 = 0;
     int temp2 = 0;
@@ -44,6 +47,9 @@ int main(void) {
     xAcceleration = convertAccelerationForAxis(xMSB, xLSB);
     sprintf(line, "X: %d", xAcceleration);
     putsLCD(&line);
+    moveCursorBack(3);
+    putsLCD("abc");
+    
     // main loop
     while(1){
         xMSB = mmaReadAxis(OUT_X_MSB);
