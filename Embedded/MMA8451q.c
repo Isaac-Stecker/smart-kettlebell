@@ -5,25 +5,26 @@
  */
 
 #include <xc.h>
+#include <math.h>
 #include "I2C.h"
 #include "Funcs.h"
 
 #define WRITE_CMD 0x3A
 #define READ_CMD 0x3B
 
-#define MSB_BIT_7 10000
-#define MSB_BIT_6 5000
-#define MSB_BIT_5 2500
-#define MSB_BIT_4 1250
-#define MSB_BIT_3 625
-#define MSB_BIT_2 313
-#define MSB_BIT_1 156
-#define LSB_BIT_8 78
-#define LSB_BIT_7 39
-#define LSB_BIT_6 20
-#define LSB_BIT_5 10
-#define LSB_BIT_4 5
-#define LSB_BIT_3 2
+#define MSB_BIT_7 1.0
+#define MSB_BIT_6 0.5
+#define MSB_BIT_5 0.25
+#define MSB_BIT_4 0.125
+#define MSB_BIT_3 0.0625
+#define MSB_BIT_2 0.0313
+#define MSB_BIT_1 0.0156
+#define LSB_BIT_8 0.0078
+#define LSB_BIT_7 0.0039
+#define LSB_BIT_6 0.0020
+#define LSB_BIT_5 0.0010
+#define LSB_BIT_4 0.0005
+#define LSB_BIT_3 0.00025
 
 
 // order to read reg: WRITE_CMD -> ACCEL_REG -> repeated start -> READ_CMD
@@ -65,8 +66,8 @@ unsigned char mmaReadAxis(char axis){
 }
 
 // convert MSB and LSB accelerometer measurement to g's in fractional form. Returns a integer that was shifted 4 times from a decimal, i.e., 0.5 = 5000
-int convertAccelerationForAxis(unsigned char axisMSB, unsigned char axisLSB) {
-    int acceleration = 0;
+float convertAccelerationForAxis(unsigned char axisMSB, unsigned char axisLSB) {
+    float acceleration = 0;
     int sign = 0;
     
     // determine the sign of the acceleration
@@ -126,4 +127,10 @@ int convertAccelerationForAxis(unsigned char axisMSB, unsigned char axisLSB) {
         acceleration *= -1;
     }
     return acceleration;
+}
+
+float calculateTotalAcceleration(float xAcceleration, float yAcceleration, float zAcceleration){
+    float totalAcceleration = 0;
+    totalAcceleration = sqrt(pow(xAcceleration, 2) + pow(yAcceleration, 2) + pow(zAcceleration, 2));
+    return totalAcceleration;
 }

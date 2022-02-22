@@ -27,28 +27,33 @@ int main(void) {
     unsigned char yLSB;
     unsigned char zMSB;
     unsigned char zLSB;
-    int xAcceleration = 0;
-    int yAcceleration = 0;
-    int zAcceleration = 0;
-    int baselineX = 0;
-    int baselineY = 0;
-    int baseilneZ = 0;
+    float xAcceleration = 0;
+    float yAcceleration = 0;
+    float zAcceleration = 0;
+    float baseLineAcceleration = 0;
+    float currentAcceleration = 0;
     char line[16];
-    int temp1 = 0;
-    int temp2 = 0;
     
     // turn on accelerometer
     mmaWriteReg(CTRL_REG_1, ACTIVE);
     
-    // test conversion functions
+    // obtain baseline acceleration reading
     xMSB = mmaReadAxis(OUT_X_MSB);
     us_delay(10);
     xLSB = mmaReadAxis(OUT_X_LSB);
+    us_delay(10);
     xAcceleration = convertAccelerationForAxis(xMSB, xLSB);
-    sprintf(line, "X: %d", xAcceleration);
-    putsLCD(&line);
-    moveCursorBack(3);
-    putsLCD("abc");
+    yMSB = mmaReadAxis(OUT_Y_MSB);
+    us_delay(10);
+    yLSB = mmaReadAxis(OUT_Y_LSB);
+    us_delay(10);
+    yAcceleration = convertAccelerationForAxis(yMSB, yLSB);
+    zMSB = mmaReadAxis(OUT_Z_MSB);
+    us_delay(10);
+    zLSB = mmaReadAxis(OUT_Z_LSB);
+    us_delay(10);
+    zAcceleration = convertAccelerationForAxis(zMSB, zLSB);
+    baseLineAcceleration = calculateTotalAcceleration(xAcceleration, yAcceleration, zAcceleration);
     
     // main loop
     while(1){
